@@ -3,6 +3,9 @@
 ## 1. Introduction
 Infrastructure monitoring is the basis for application performance management. The underlying system’s availability and health must be maximized continually. To achieve this, one has to monitor the system metrics like CPU, memory, network, and disk. Response time lag, if any must be addressed swiftly. Here we'll take a look at how to Monitor servers (and even Docker Containers running inside the Server) using Grafana, Prometheus, Node Exporter, CAdvisor and Flask App.
 
+![alt text](images/docker-prometheus-overview.png)
+
+
 ---
 
 ## 2. Core Components
@@ -73,6 +76,7 @@ $ ab -c 10 —n 500 —r localhost:5000
 ```
 
 ```
+# Testing / path
 $ ab -n 1000 -c 3 http://localhost:5000/
 This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
@@ -128,9 +132,16 @@ Percentage of the requests served within a certain time (ms)
   99%    498
  100%    504 (longest request)
 
-ab -n 1000000 -c 3 http://localhost:5000/abc
 
-ab -n 1000000 -c 3 http://localhost:5000/foo
+
+# Testing /abc path
+$ ab -n 1000 -c 3 http://localhost:5000/abc
+...
+
+# Testing /foo path
+$ ab -n 1000 -c 3 http://localhost:5000/foo
+...
+
 ```
 
 #### Note) alternative GUI tool: With JMeter
