@@ -1,9 +1,5 @@
 version: '3.8'
 
-volumes:
-  prometheus_data: {}
-  grafana_data: {}
-
 networks:
   app-tier:
     driver: bridge
@@ -16,7 +12,7 @@ services:
     image: prom/prometheus:latest
     volumes:
       - ./prometheus/:/etc/prometheus/
-      - prometheus_data:/prometheus
+      - ./prometheus/data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -90,7 +86,7 @@ services:
     ports:
       - 3001:3000
     volumes:
-      - grafana_data:/var/lib/grafana
+      - ./grafana/data:/var/lib/grafana
       - ./grafana/provisioning/:/etc/grafana/provisioning/
     env_file:
       - ./grafana/config.monitoring

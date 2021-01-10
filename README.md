@@ -74,11 +74,43 @@ This library provides HTTP request metrics to export into Prometheus. It can als
 https://pypi.org/project/prometheus-flask-exporter/
 
 ### code:
-![alt text](images/flask-app-code.png)
+![acode](images/flask-app-code.png)
 
 
 ## 6. How to configure a scrape on Prometheus
-![alt text](images/prometheus_scrape_flask_app.png)
+![How to configure a scrape on Prometheus](images/prometheus_scrape_flask_app.png)
+
+### Note
+> When you add a new source of scrape on Prometheus, you should validate the source of the metrics like cAdvisor, Java Spring API, Django, etc. If the validate of the srape is passed, you can wire into prometheus.yml. Here is how you can test it out with curl command.
+> ``` 
+> curl localhost:5000/metrics
+> # HELP python_gc_objects_collected_total Objects collected during gc
+> # TYPE python_gc_objects_collected_total counter
+> python_gc_objects_collected_total{generation="0"} 1525.0
+> python_gc_objects_collected_total{generation="1"} 33.0
+> ...
+> # HELP process_virtual_memory_bytes Virtual memory size in bytes.
+> # TYPE process_virtual_memory_bytes gauge
+> process_virtual_memory_bytes 1.91111168e+08
+> # HELP process_resident_memory_bytes Resident memory size in bytes.
+> # TYPE process_resident_memory_bytes gauge
+> process_resident_memory_bytes 3.3411072e+07
+> # HELP process_start_time_seconds Start time of the process since unix epoch in > seconds.
+> flask_exporter_info{version="0.18.1"} 1.0
+> # HELP flask_http_request_duration_seconds Flask HTTP request duration in seconds
+> # TYPE flask_http_request_duration_seconds histogram
+> # HELP flask_http_request_total Total number of HTTP requests
+> # TYPE flask_http_request_total counter
+> # HELP flask_http_request_exceptions_total Total number of HTTP requests which > resulted in an exception
+> # TYPE flask_http_request_exceptions_total counter
+> # HELP flask_app_info App Info, this can be anything you want
+> # TYPE flask_app_info gauge
+> ...
+> flask_by_path_counter_total{path="/metrics"} 49.0
+> # HELP flask_by_path_counter_created Request count by request paths
+> # TYPE flask_by_path_counter_created gauge
+> flask_by_path_counter_created{path="/metrics"} 1.6103074201825395e+09
+> '''
 
 ---
 
