@@ -3,7 +3,7 @@
 ## 1. Introduction
 Infrastructure monitoring is the basis for application performance management. The underlying system’s availability and health must be maximized continually. To achieve this, one has to monitor the system metrics like CPU, memory, network, and disk. Response time lag, if any must be addressed swiftly. Here we'll take a look at how to Monitor servers (and even Docker Containers running inside the Server) using Grafana, Prometheus, Node Exporter, CAdvisor and Flask App.
 
-![alt text](images/docker-prometheus-overview.png)
+![Prometheus overview](images/docker-prometheus-overview.png)
 
 
 ---
@@ -33,10 +33,10 @@ id: admin
 pw: 1234
 
 ### Docker container dashboard
-![alt text](images/docker-container-monitoring.png)
+![Docker container dashboard](images/docker-container-monitoring.png)
 
 ### Flask application dashboard
-![alt text](images/flask-app-monitoring.png)
+![Flask application dashboard](images/flask-app-monitoring.png)
 
 ---
 
