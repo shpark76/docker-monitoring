@@ -65,10 +65,12 @@ https://pypi.org/project/prometheus-flask-exporter/
 ---
 
 ## 7. Load simulation with Apache Benchmark
-Apache benchmark is a simple-to-use tool to help you understand how an HTTP server copes with large volumes of traffic. 
+Apache benchmark is a simple-to-use tool to help you understand how an HTTP server copes with large volumes of traffic. https://httpd.apache.org/docs/2.4/programs/ab.html
 
 i.e) Fire 500 requests, with a maximum concurrency of 10 at a time
+```
 $ ab -c 10 —n 500 —r localhost:5000
+```
 
 ```
 $ ab -n 1000 -c 3 http://localhost:5000/
