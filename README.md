@@ -18,9 +18,33 @@ $ docker-compose up
 ## Grafana UI
 http://localhost:3001
 
+Login with
 id: admin
 pw: 1234
 
+### Docker container dashboard
+![alt text](images/docker-container-monitoring.png)
+
+### Flask application dashboard
+![alt text](images/flask-app-monitoring.png)
+
+
+## Flask code
+### requirements.txt
+```
+flask
+redis
+...
+prometheus-flask-exporter
+...
+```
+
+### code:
+![alt text](images/flask-app-code.png)
+
+
+### How to configure a scrape on Prometheus
+![alt text](images/prometheus_scrape_flask_app.png)
 
 ## Load simulation
 ```
@@ -83,3 +107,38 @@ ab -n 1000000 -c 3 http://localhost:5000/abc
 
 ab -n 1000000 -c 3 http://localhost:5000/foo
 ```
+
+## Folder tree
+```
+├── README.md
+├── alertmanager
+│   └── config.yml
+├── docker-compose.yml
+├── flask
+│   ├── Dockerfile
+│   ├── api
+│   │   ├── server.py
+│   │   └── wsgi.py
+│   └── requirements.txt
+├── grafana
+│   ├── config.monitoring
+│   └── provisioning
+│       ├── dashboards
+│       │   ├── Docker\ Prometheus\ Monitoring-1571332751387.json
+│       │   ├── FlaskApp_Monitoring.json
+│       │   └── dashboard.yml
+│       └── datasources
+│           └── datasource.yml
+└── prometheus
+    ├── alert.rules
+    └── prometheus.yml
+
+8 directories, 14 files
+```
+
+
+
+## Reference:
+- Prometheus: https://prometheus.io
+- Prometheus Flask Package: https://github.com/rycus86/prometheus_flask_exporter
+- CAdvisor(System resource montoring): https://github.com/google/cadvisor
