@@ -1,22 +1,28 @@
 # Monitoring Servers and Docker Containers using Prometheus with Grafana
 
-## Introduction
+## 1. Introduction
 Infrastructure monitoring is the basis for application performance management. The underlying system’s availability and health must be maximized continually. To achieve this, one has to monitor the system metrics like CPU, memory, network, and disk. Response time lag, if any must be addressed swiftly. Here we'll take a look at how to Monitor servers (and even Docker Containers running inside the Server) using Grafana, Prometheus, Node Exporter, CAdvisor and Flask App.
 
-## Core Components
+---
+
+## 2. Core Components
 - Grafana- Database for Analytics & monitoring solution
 - Prometheus- Event monitoring and alerting
 - Node-Exporter- Monitoring Linux host metrics
 - CAdvisor- Monitoring metrics for the running Containers.
 - Flask-App- Your Flask App (or Django, etc)
 
-## Docker Compose up
+---
+
+## 3. Running Docker Compose Up
 ```
 $ docker-compose build
 $ docker-compose up
 ```
 
-## Grafana UI
+---
+
+## 4. Grafana UI
 http://localhost:3001
 
 Login with
@@ -29,8 +35,12 @@ pw: 1234
 ### Flask application dashboard
 ![alt text](images/flask-app-monitoring.png)
 
+---
 
-## Flask code
+## 5. Flask code
+
+Metrics type: https://prometheus.io/docs/concepts/metric_types/
+
 ### requirements.txt
 ```
 flask
@@ -40,14 +50,26 @@ prometheus-flask-exporter
 ...
 ```
 
+### Prometheus Flask exporter
+This library provides HTTP request metrics to export into Prometheus. It can also track method invocations using convenient functions.
+
+https://pypi.org/project/prometheus-flask-exporter/
+
 ### code:
 ![alt text](images/flask-app-code.png)
 
 
-### How to configure a scrape on Prometheus
+## 6. How to configure a scrape on Prometheus
 ![alt text](images/prometheus_scrape_flask_app.png)
 
-## Load simulation
+---
+
+## 7. Load simulation with Apache Benchmark
+Apache benchmark is a simple-to-use tool to help you understand how an HTTP server copes with large volumes of traffic. 
+
+i.e) Fire 500 requests, with a maximum concurrency of 10 at a time
+$ ab -c 10 —n 500 —r localhost:5000
+
 ```
 $ ab -n 1000 -c 3 http://localhost:5000/
 This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
@@ -109,7 +131,14 @@ ab -n 1000000 -c 3 http://localhost:5000/abc
 ab -n 1000000 -c 3 http://localhost:5000/foo
 ```
 
-## Folder tree
+#### Note) alternative GUI tool: With JMeter
+> JMeter is a more powerful tool than Apache Benchmark and allows you to be a bit more specific about 
+> how your traffic is fired. For example, with JMeter it is possible to say “Send 1000 requests spaced > out over 1 minute”, which is much more realistic. It is so configurable that it provides a GUI 
+> (Graphical User Interface) to help you set up your tests. https://jmeter.apache.org/
+
+---
+
+## 8. Folder structure
 ```
 ├── README.md
 ├── alertmanager
@@ -137,9 +166,10 @@ ab -n 1000000 -c 3 http://localhost:5000/foo
 8 directories, 14 files
 ```
 
-
+---
 
 ## Reference:
 - Prometheus: https://prometheus.io
 - Prometheus Flask Package: https://github.com/rycus86/prometheus_flask_exporter
 - CAdvisor(System resource montoring): https://github.com/google/cadvisor
+- Apache HTTP server benchmarking tool: https://httpd.apache.org/docs/2.4/programs/ab.html
