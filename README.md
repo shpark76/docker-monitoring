@@ -5,7 +5,6 @@ Infrastructure monitoring is the basis for application performance management. T
 
 ![Prometheus overview](images/docker-prometheus-overview.png)
 
-
 ---
 
 ## 2. Core Components
@@ -20,7 +19,23 @@ Infrastructure monitoring is the basis for application performance management. T
 ## 3. Running Docker Compose Up
 ```
 $ docker-compose build
+
 $ docker-compose up
+
+Starting docker-monitoring_alertmanager_1  ... done
+Starting docker-monitoring_node-exporter_1 ... done
+Starting docker-monitoring_flask_app_1     ... done
+...
+Starting docker-monitoring_grafana_1       ... done
+Attaching to docker-monitoring_alertmanager_1, docker-monitoring_flask_app_1, docker-monitoring_node-exporter_1, docker-monitoring_cadvisor_1, docker-monitoring_redis_1, 
+....
+alertmanager_1   | level=info ts=2021-01-10T02:35:10.540Z caller=cluster.go:161 component=cluster msg="setting advertise address explicitly" addr=172.24.0.2 port=9094
+cadvisor_1       | W0110 02:35:10.890139       1 manager.go:349] Could not configure a source for OOM detection, disabling OOM events: open /dev/kmsg: no such file or directory
+...
+remote_addr=172.24.0.1 time_ms=0 size=49 referer="http://localhost:3001/d/_eX4mpl3/flask-app-dashboard?orgId=1&refresh=5s&from=now-15m&to=now"
+flask_app_1      | 172.24.0.7 - - [10/Jan/2021 02:38:08] "GET /metrics HTTP/1.1" 200 -
+flask_app_1      | 172.24.0.7 - - [10/Jan/2021 02:38:13] "GET /metrics HTTP/1.1" 200 -
+
 ```
 
 ---
