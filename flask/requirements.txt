@@ -1,0 +1,11 @@
+flask
+wheel
+redis
+pymysql
+pymongo
+flask-mysql
+jsonify
+requests
+cryptography
+prometheus-flask-exporter
+gunicorn
