@@ -119,7 +119,7 @@ Apache benchmark is a simple-to-use tool to help you understand how an HTTP serv
 
 i.e) Fire 500 requests, with a maximum concurrency of 10 at a time
 ```
-$ ab -c 10 —n 500 —r localhost:5000
+$ ab -c 10 —n 500 http://localhost:5000/
 ```
 
 ```
